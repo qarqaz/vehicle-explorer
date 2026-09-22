@@ -1,6 +1,16 @@
-@VehicleExplorer.Api_HostAddress = http://localhost:5167
+### Get all makes
 
-GET {{VehicleExplorer.Api_HostAddress}}/weatherforecast/
+GET https://vpic.nhtsa.dot.gov/api/vehicles/GetAllMakes?format=json
 Accept: application/json
 
-###
+
+### Get vehicle types for make
+
+GET https://vpic.nhtsa.dot.gov/api/vehicles/GetVehicleTypesForMakeId/448?format=json
+Accept: application/json
+
+
+### Get models for make + year + vehicle type
+
+GET https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeIdYear/makeId/474/modelyear/2015/vehicletype/truck?format=json
+Accept: application/json
