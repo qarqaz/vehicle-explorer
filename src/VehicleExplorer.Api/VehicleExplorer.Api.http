@@ -1,3 +1,7 @@
+### If you can read this, I'm khaled, the port number (7151) is mine, yours may be different :)
+@VehicleExplorer.Api_HostAddress =   https://localhost:7151
+
+###=========================================== Original APIs ===========================================
 ### Get all makes
 
 GET https://vpic.nhtsa.dot.gov/api/vehicles/GetAllMakes?format=json
@@ -13,4 +17,11 @@ Accept: application/json
 ### Get models for make + year + vehicle type
 
 GET https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeIdYear/makeId/474/modelyear/2015/vehicletype/truck?format=json
+Accept: application/json
+
+
+###=========================================== Our New Application APIs ===========================================
+### Get all vehicle makes
+
+GET {{VehicleExplorer.Api_HostAddress}}/api/makes
 Accept: application/json
