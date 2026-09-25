@@ -1,11 +1,16 @@
 using System.Net.Http.Headers;
 using VehicleExplorer.Api.Services;
+using VehicleExplorer.Api.Exceptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddProblemDetails();
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 builder.Services.AddHttpClient<IVehicleService, VehicleService>(
     (serviceProvider, client) =>
@@ -36,6 +41,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VehicleExplorer.Api.Models.Responses;
 using VehicleExplorer.Api.Services;
+using VehicleExplorer.Api.Models.Requests;
 
 namespace VehicleExplorer.Api.Controllers
 {
@@ -9,10 +10,12 @@ namespace VehicleExplorer.Api.Controllers
     public class VehiclesController : ControllerBase
     {
         private readonly IVehicleService _vehicleService;
+        private readonly ILogger<VehiclesController> _logger;
 
-        public VehiclesController(IVehicleService vehicleService)
+        public VehiclesController(IVehicleService vehicleService, ILogger<VehiclesController> logger)
         {
             _vehicleService = vehicleService;
+            _logger = logger;
         }
 
         [HttpGet("makes")]
@@ -34,8 +37,16 @@ namespace VehicleExplorer.Api.Controllers
 
         [HttpGet("makes/{makeId:int}/vehicle-types")]
         [ProducesResponseType(typeof(IReadOnlyList<VehicleTypeResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<IReadOnlyList<VehicleTypeResponse>>> GetVehicleTypes(int makeId, CancellationToken cancellationToken)
         {
+            if (makeId <= 0)
+            {
+                ModelState.AddModelError(nameof(makeId), "Make ID must be greater than 0.");
+
+                return ValidationProblem(ModelState);
+            }
+
             var vehicleTypes = await _vehicleService.GetVehicleTypesAsync(makeId, cancellationToken);
 
             var response = vehicleTypes
@@ -51,9 +62,13 @@ namespace VehicleExplorer.Api.Controllers
         }
 
         [HttpGet("models")]
-        public async Task<ActionResult<IReadOnlyList<VehicleModelResponse>>> GetModels(int makeId, int year, string vehicleType, CancellationToken cancellationToken)
+        [ProducesResponseType(typeof(IReadOnlyList<VehicleModelResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IReadOnlyList<VehicleModelResponse>>> GetModels([FromQuery] VehicleModelSearchRequest request, CancellationToken cancellationToken)
         {
-            var models = await _vehicleService.GetModelsAsync(makeId, year, vehicleType, cancellationToken);
+            _logger.LogInformation("Searching vehicle models. MakeId: {MakeId}, Year: {Year}, VehicleType: {VehicleType}", request.MakeId, request.Year, request.VehicleType);
+
+            var models = await _vehicleService.GetModelsAsync(request.MakeId, request.Year, request.VehicleType, cancellationToken);
 
             var response = models
                 .Select(model => new VehicleModelResponse
