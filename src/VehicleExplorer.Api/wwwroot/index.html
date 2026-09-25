@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Vehicle Explorer</title>
+
+    <link rel="stylesheet" href="css/site.css">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <header class="page-header">
+            <h1>Vehicle Explorer</h1>
+            <p>Find vehicle models by make, year and vehicle type.</p>
+        </header>
+
+        <!-- Vehicle Search -->
+        <section class="search-card">
+
+            <div class="form-grid">
+
+                <!-- Make -->
+                <div class="form-group make-group">
+                    <label for="makeInput">Make</label>
+
+                    <div class="searchable-select">
+                        <input id="makeInput"
+                               type="text"
+                               placeholder="Search or select a make..."
+                               autocomplete="off">
+
+                        <button id="clearMakeButton"
+                                class="clear-button"
+                                type="button"
+                                aria-label="Clear make"
+                                title="Clear">
+                            &times;
+                        </button>
+
+                        <div id="makeDropdown"
+                             class="dropdown-list">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Year -->
+                <div class="form-group">
+                    <label for="yearSelect">Year</label>
+
+                    <select id="yearSelect">
+                        <option value="">Select year</option>
+                    </select>
+                </div>
+
+                <!-- Vehicle Type -->
+                <div class="form-group">
+                    <label for="vehicleTypeInput">Vehicle Type</label>
+
+                    <div class="searchable-select">
+                        <input id="vehicleTypeInput"
+                               type="text"
+                               placeholder="Search or select a type..."
+                               autocomplete="off"
+                               disabled>
+
+                        <button id="clearVehicleTypeButton"
+                                class="clear-button"
+                                type="button"
+                                aria-label="Clear vehicle type"
+                                title="Clear">
+                            &times;
+                        </button>
+
+                        <div id="vehicleTypeDropdown"
+                             class="dropdown-list">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <button id="searchButton" disabled>
+                Search Models
+            </button>
+
+        </section>
+
+        <!-- Results -->
+        <section class="results-section">
+
+            <div class="results-header">
+                <h2>Available Models</h2>
+                <span id="message"></span>
+            </div>
+
+            <div id="modelsContainer" class="models-grid"></div>
+
+        </section>
+
+        <!-- API Playground -->
+        <section class="api-playground">
+
+            <div class="playground-heading">
+                <div>
+                    <h2>API Playground</h2>
+                    <p>
+                        Test the Vehicle Explorer API directly and inspect
+                        the JSON response.
+                    </p>
+                </div>
+
+                <span class="api-badge">GET</span>
+            </div>
+
+            <div class="api-request">
+
+                <label for="apiUrlInput">Request</label>
+
+                <div class="api-request-row">
+
+                    <input id="apiUrlInput"
+                           type="text"
+                           value="/api/makes"
+                           spellcheck="false"
+                           autocomplete="off">
+
+                    <button id="sendApiButton"
+                            type="button">
+                        Send Request
+                    </button>
+
+                </div>
+
+                <div class="api-examples">
+                    <span>Examples:</span>
+
+                    <button type="button"
+                            class="api-example"
+                            data-url="/api/makes">
+                        Makes
+                    </button>
+
+                    <button type="button"
+                            class="api-example"
+                            data-url="/api/makes/448/vehicle-types">
+                        Toyota Types
+                    </button>
+
+                    <button type="button"
+                            class="api-example"
+                            data-url="/api/models?makeId=448&year=2015&vehicleType=Truck">
+                        Toyota Trucks
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="api-response">
+
+                <div class="response-toolbar">
+
+                    <div class="response-title">
+                        <span>Response</span>
+
+                        <span id="apiStatus"
+                              class="status-badge">
+                            Not sent
+                        </span>
+                    </div>
+
+                    <button id="copyJsonButton"
+                            class="copy-button"
+                            type="button"
+                            disabled>
+                        Copy JSON
+                    </button>
+
+                </div>
+
+                <pre id="apiResponse"
+                     class="json-viewer"><code>Select an example or enter an API path, then click Send Request.</code></pre>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="js/app.js"></script>
+
+</body>
+</html>
