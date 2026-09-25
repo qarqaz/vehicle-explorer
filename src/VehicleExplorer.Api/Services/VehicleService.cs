@@ -1,4 +1,5 @@
 ﻿using VehicleExplorer.Api.Models.Nhtsa;
+using VehicleExplorer.Api.Models.Responses;
 
 namespace VehicleExplorer.Api.Services
 {

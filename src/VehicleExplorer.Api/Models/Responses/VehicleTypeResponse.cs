@@ -1,4 +1,4 @@
-﻿namespace VehicleExplorer.Api.Models
+﻿namespace VehicleExplorer.Api.Models.Responses
 {
     public class VehicleTypeResponse
     {

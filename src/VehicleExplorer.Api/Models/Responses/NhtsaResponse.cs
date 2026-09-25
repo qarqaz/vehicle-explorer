@@ -1,4 +1,4 @@
-﻿namespace VehicleExplorer.Api.Models.Nhtsa
+﻿namespace VehicleExplorer.Api.Models.Responses
 {
     public sealed class NhtsaResponse<T>
     {

@@ -8,15 +8,15 @@ GET https://vpic.nhtsa.dot.gov/api/vehicles/GetAllMakes?format=json
 Accept: application/json
 
 
-### Get vehicle types for make
+### Get vehicle types for make (TOYOTA)
 
 GET https://vpic.nhtsa.dot.gov/api/vehicles/GetVehicleTypesForMakeId/448?format=json
 Accept: application/json
 
 
-### Get models for make + year + vehicle type
+### Get models for make + year + vehicle type (TOYOTA)
 
-GET https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeIdYear/makeId/474/modelyear/2015/vehicletype/truck?format=json
+GET https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeIdYear/makeId/448/modelyear/2015/vehicletype/truck?format=json
 Accept: application/json
 
 
@@ -27,7 +27,13 @@ GET {{VehicleExplorer.Api_HostAddress}}/api/makes
 Accept: application/json
 
 
-### Get vehicle types for Honda
+### Get vehicle types for TOYOTA
 
 GET {{VehicleExplorer.Api_HostAddress}}/api/makes/448/vehicle-types
+Accept: application/json
+
+
+### Get models for TOYOTA trucks in 2015 
+
+GET {{VehicleExplorer.Api_HostAddress}}/api/models?makeId=448&year=2015&vehicleType=Truck
 Accept: application/json
