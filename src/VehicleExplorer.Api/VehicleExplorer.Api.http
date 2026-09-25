@@ -25,3 +25,9 @@ Accept: application/json
 
 GET {{VehicleExplorer.Api_HostAddress}}/api/makes
 Accept: application/json
+
+
+### Get vehicle types for Honda
+
+GET {{VehicleExplorer.Api_HostAddress}}/api/makes/448/vehicle-types
+Accept: application/json

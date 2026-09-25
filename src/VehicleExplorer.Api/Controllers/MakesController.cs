@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using VehicleExplorer.Api.Models;
 using VehicleExplorer.Api.Models.Responses;
 using VehicleExplorer.Api.Services;
 
@@ -28,6 +29,24 @@ namespace VehicleExplorer.Api.Controllers
                 Name = make.MakeName
             })
                 .OrderBy(make => make.Name)
+                .ToArray();
+
+            return Ok(response);
+        }
+
+        [HttpGet("{makeId:int}/vehicle-types")]
+        [ProducesResponseType(typeof(IReadOnlyList<VehicleTypeResponse>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<IReadOnlyList<VehicleTypeResponse>>> GetVehicleTypes(int makeId, CancellationToken cancellationToken)
+        {
+            var vehicleTypes = await _vehicleService.GetVehicleTypesAsync(makeId, cancellationToken);
+
+            var response = vehicleTypes
+                .Select(vehicleType => new VehicleTypeResponse
+                {
+                    Id = vehicleType.VehicleTypeId,
+                    Name = vehicleType.VehicleTypeName
+                })
+                .OrderBy(vehicleType => vehicleType.Name)
                 .ToArray();
 
             return Ok(response);
