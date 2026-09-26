@@ -4,6 +4,14 @@ Vehicle Explorer is a .NET 10 web application that allows users to search for ve
 
 Vehicle data is retrieved from the [NHTSA Vehicle Product Information Catalog (vPIC) API](https://vpic.nhtsa.dot.gov/api/).
 
+## Live Demo
+
+The application is deployed on AWS EC2:
+
+http://18.184.96.154
+
+> **Note:** The demo currently uses HTTP only. If your browser automatically switches to HTTPS, please use the `http://` URL explicitly.
+
 ## Features
 
 - Browse and search vehicle manufacturers
@@ -26,6 +34,7 @@ Vehicle data is retrieved from the [NHTSA Vehicle Product Information Catalog (v
 - xUnit
 - Docker
 - NHTSA vPIC API
+- AWS EC2
 
 ## Project Structure
 
