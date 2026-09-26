@@ -129,6 +129,8 @@ Stop the container with `Ctrl+C`.
 
 ## API Endpoints
 
+> **Quick API Testing:** After running the application, you can test all API endpoints directly using `src/VehicleExplorer.Api/VehicleExplorer.Api.http`. No additional API testing tool is required.
+
 ### Get Vehicle Makes
 
 ```http
